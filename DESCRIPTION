@@ -1,0 +1,10 @@
+Package: intrinio.tcg
+Title: group of functions to retrieve information from the Intrinio API databases. 
+Version: 0.0.0.9000
+Authors@R: person("Pedro", "Camacho", email = "pedromoisescamacho@gmail.com", role = c("aut", "cre"))
+Description: Intrinio is a company that offers financial information through an API. This package gathers functions to retrieve information from the different API feeds.Therefore the available information is limited to what is held by intrinio. 
+Depends: R (>= 3.3.2)
+License: you may copy and use this package as you wish, just mention me (help me increase my populary)
+Encoding: UTF-8
+LazyData: true
+        
