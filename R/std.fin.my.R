@@ -7,7 +7,10 @@
 #' @password Your passoword of API key given by intrinio. You can find this information on your personal information on intrinio.
 #' @return Returns a list as table with the tag name and the information for a given year.
 #' @examples
+#`
 #' data_avarage("AAPL", "cash_flow_statement", "FY", 3) #returns a the income statement for Apple Inc for the last 5 years
+#'
+#' @api credict usage: the amount of API credits used by the function is the amount passed to paramenter period.quantity plus 1, e.g., if you passed period.quantity = 5, then you will use 5+1= 6 api credicts
 #'
 #'
 
@@ -21,8 +24,8 @@ std.fin.my <- function(ticker = "AAPL",
         library(jsonlite); library(httr); library(reshape)
         base <- "https://api.intrinio.com/financials/standardized?identifier=" #called "endpoint" on the API document
         seq <- 0:(period.quantity-1)
-        call <- paste(base, ticker, "&statement=", statement, "&type=", period_type,"&sequence=", sep  = "")
-        call_list <- lapply(seq, function(x) {paste(call, x, sep = "")})
+        call <- paste0(base, ticker, "&statement=", statement, "&type=", period_type,"&sequence=")
+        call_list <- lapply(seq, function(x) {paste0(call, x)})
         lists <- lapply(call_list, function(y) {
                 tp <- GET(y, authenticate(username, password, type = "basic"))
                 z <- suppressMessages(unlist(content(tp, as = "text")))
