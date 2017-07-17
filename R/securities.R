@@ -1,12 +1,12 @@
-#`  companies i.e. Returns information for all companies covered by Intrinio. the class returned is a list composed of a table and a integer. The former is the information of all the companies and the latter is the api_credits consumed by the function. Usefull to know all the companies that we have information from.
+#`  Securities i.e. Returns information for all securities covered by Intrinio. the class returned is a list composed of a table and a integer. The former is the information of all the securities and the latter is the api_credits consumed by the function. Usefull to know all the securities that we have information from.
 #'
 #' @description This function only needs the username and API key since it is only a function as reference for you to know the avaiable companies to download information.
 #'
 #'
 
-companies <- function(api_credits = FALSE) {
+securities <- function(api_credits = FALSE) {
         library(jsonlite);library(httr); library(reshape)
-        base <- "https://api.intrinio.com/companies"
+        base <- "https://api.intrinio.com/securities"
         #getting the first page of the call
         tp <- GET(base, authenticate(username, password, type = "basic"))
         z <- suppressMessages(unlist(content(tp, as = "text")))
@@ -22,10 +22,10 @@ companies <- function(api_credits = FALSE) {
                 table <- suppressMessages(fromJSON(z2))[[1]]
         })
         #putting all the tables together
-         finaltable<- rbind(list[[1]],do.call(rbind, table_list))
+        finaltable<- rbind(list[[1]],do.call(rbind, table_list))
 
         if (api_credits == TRUE) {
                 result <- list(table = finaltable, apicredits = list$total_pages)
-                }
+        }
         else finaltable
 }
